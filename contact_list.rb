@@ -23,6 +23,8 @@ elsif ARGV[0].include? "find"
   Contact.find(ARGV[1])
 elsif ARGV[0].include? "list"
   Contact.all
+elsif ARGV[0].include? "show"
+  Contact.show(ARGV[1])
 
 end
 

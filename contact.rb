@@ -10,8 +10,7 @@ class Contact
     @email = email
   end
 
-  def to_s()
-
+  def to_s
     # TODO: return string representation of Contact
   end
  
@@ -42,6 +41,12 @@ class Contact
     
     def show(id)
       # TODO: Show a contact, based on ID
+      arr = ContactDatabase.read
+      arr.each do |item|
+        if item[0] == id.to_s
+          puts item
+        end
+      end
     end
     
   end
