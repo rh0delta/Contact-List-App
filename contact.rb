@@ -9,6 +9,11 @@ class Contact
     @name = name
     @email = email
   end
+
+  def to_s()
+
+    # TODO: return string representation of Contact
+  end
  
   ## Class Methods
   class << self
@@ -26,12 +31,12 @@ class Contact
       #   end
       # end
     end
- 
+
     def all
       # TODO: Return the list of contacts, as is
       arr = ContactDatabase.read
-      arr.each do |item|
-        to_s(arr)
+      arr.each do |item| 
+        puts "#{item[0]}: #{item[1]} (#{item[2]})"
       end
     end
     
@@ -41,13 +46,6 @@ class Contact
     
   end
 
-  private
-
-  def to_s(arr)
-    # TODO: return string representation of Contact
-    arr.each do |item| 
-      p "#{item[0]}: #{item[1]} (#{item[2]})  "
-    end
-  end
+  
  
 end

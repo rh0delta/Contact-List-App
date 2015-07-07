@@ -20,7 +20,7 @@ elsif ARGV[0].include? "new"
   contact = Contact.new(name, email)
   Contact.create(contact.name, contact.email)
 elsif ARGV[0].include? "find"
-  Contact.find(ARGV[1].to_s)
+  Contact.find(ARGV[1])
 elsif ARGV[0].include? "list"
   Contact.all
 
