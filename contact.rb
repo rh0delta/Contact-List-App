@@ -44,7 +44,7 @@ class Contact
       arr = ContactDatabase.read
       arr.each do |item|
         if item[0] == id.to_s
-          puts item
+          puts "#{item[0]}: #{item[1]} (#{item[2]})"
         end
       end
     end
