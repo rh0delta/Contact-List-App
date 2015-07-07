@@ -23,19 +23,19 @@ class Contact
  
     def find(term)
       # TODO: Will find and return contacts that contain the term in the first name, last name or email
-      # arr = ContactDatabase.read
-      # arr.each do |item|
-      #   if item.include? term
-      #     pp item.to_s
-      #   end
-      # end
+      arr = ContactDatabase.read
+      arr.each do |item|
+        if item.include? term
+          contact_array_to_s(item)
+        end
+      end
     end
 
     def all
       # TODO: Return the list of contacts, as is
       arr = ContactDatabase.read
       arr.each do |item| 
-        puts "#{item[0]}: #{item[1]} (#{item[2]})"
+        contact_array_to_s(item)
       end
     end
     
@@ -44,9 +44,15 @@ class Contact
       arr = ContactDatabase.read
       arr.each do |item|
         if item[0] == id.to_s
-          puts "#{item[0]}: #{item[1]} (#{item[2]})"
+          contact_array_to_s(item)
         end
       end
+    end
+
+    private
+
+    def contact_array_to_s(contact_array)
+      puts "#{contact_array[0]}: #{contact_array[1]} (#{contact_array[2]})"
     end
     
   end
