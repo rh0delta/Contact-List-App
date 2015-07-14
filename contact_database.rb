@@ -2,24 +2,37 @@
 require 'csv'
 
 
-class ContactDatabase
+# class ContactDatabase
 
-  def self.add(contact)
-    CSV.open('contacts.csv', "ab") do |csv|
-      csv << [next_id, contact.name, contact.email]
-    end      
+#   # def self.add(contact)
+#   #   CSV.open('contacts.csv', "ab") do |csv|
+#   #     csv << [next_id, contact.name, contact.email]
+#   #   end      
 
-  end
+#   # end
 
-  def self.read
-    contacts_array = CSV.read('contacts.csv')
-  end
+#   # def self.read
+#   #   contacts_array = CSV.read('contacts.csv')
+#   # end
 
-  private
+#   # private
 
-  def self.next_id
-    contact_array = CSV.read('contacts.csv')
-    contact_id = contact_array.length + 1
-  end
+#   # def self.next_id
+#   #   contact_array = CSV.read('contacts.csv')
+#   #   contact_id = contact_array.length + 1
+#   # end
 
-end
+#   def self.connection
+#       PG.connect(
+#         host: 'localhost',
+#         dbname: 'contact'
+#         user: 'development'
+#         password: 'develeopment'
+#         )
+#   end
+
+#   def self.save
+    
+#   end
+
+# end

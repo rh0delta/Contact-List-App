@@ -13,19 +13,23 @@ if ARGV[0].downcase == "help"
     show - Show a contact
     find - Find a contact"
 elsif ARGV[0].include? "new"
-  puts "Enter the name you wish to add: "
-  name = STDIN.gets.chomp
-  puts "Enter #{name}'s email address: "
-  email = STDIN.gets.chomp
-  contact = Contact.new(name, email)
-  Contact.create(contact.name, contact.email)
+  puts "Enter your first name: "
+  fname = STDIN.gets.chomp
+  puts "Enter your last name: "
+  lname = STDIN.gets.chomp
+  puts "E
+  nter #{fname}'s email address: "
+  eml = STDIN.gets.chomp
+  hash = {'firstname' => fname, 'lastname' => lname, 'email' => eml}
+  contact = Contact.new(hash)
+  contact.save
+  # puts contact.id
 elsif ARGV[0].include? "find"
-  Contact.find(ARGV[1])
+  puts Contact.find(ARGV[1])
 elsif ARGV[0].include? "list"
-  Contact.all
+  puts Contact.all
 elsif ARGV[0].include? "show"
-  Contact.show(ARGV[1])
+  puts Contact.show(ARGV[1])
 
 end
-
 
