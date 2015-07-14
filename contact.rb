@@ -16,7 +16,7 @@ class Contact
 
   def to_s
     # TODO: return string representation of Contact
-    str = "First Name: #{@firstname}||Last Name: #{@lastname}||Email: #{@email}"
+    str = "ID: #{@id}||First Name: #{@firstname}||Last Name: #{@lastname}||Email: #{@email}"
   end
  
   ## Class Methods
