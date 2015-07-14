@@ -8,11 +8,12 @@ require_relative 'phone'
 
 if ARGV[0].downcase == "help"
   puts "Here is a list of available commands:
-    new         - Create a new contact
-    new phone   - Add a new phone number to a contact
-    list        - List all contacts
-    show        - Show a contact
-    find        - Find a contact"
+    new          - Create a new contact
+    new phone    - Add a new phone number to a contact
+    list         - List all contacts
+    list numbers - List all phone numebrs in your list 
+    show         - Show a contact
+    find         - Find a contact"
 elsif ARGV[0] == "new"
   
   # puts contact.id
@@ -36,11 +37,12 @@ elsif ARGV[0] == "new"
     contact = Contact.new(hash)
     contact.save
   end
-
-
 elsif ARGV[0].include? "find"
   puts Contact.find(ARGV[1])
 elsif ARGV[0].include? "list"
+  if ARGV[1] == "numbers"
+    puts Phone.all_numbers
+  end
   puts Contact.all
 elsif ARGV[0].include? "show"
   puts Contact.show(ARGV[1])

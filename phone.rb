@@ -4,11 +4,17 @@ require 'pg'
 class Phone
   attr_accessor :type, :number, :contact_id
   attr_reader :id
+
+
   def initialize(hash)
     @id = hash["id"].to_i if hash["id"]
     @type = hash["type"]
     @number = hash["number"]
     @contact_id = hash["contact_id"]
+  end
+
+  def to_s
+    str = "Type: #{@type}||Number: #{@number}||Contact ID: #{contact_id}"
   end
 
   def save
