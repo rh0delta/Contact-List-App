@@ -1,3 +1,7 @@
+require 'active_record'
+require 'pg'
+require 'table_print'
+require 'awesome_print'
 require_relative 'contact'
 require_relative 'phone'
 
@@ -5,26 +9,36 @@ require_relative 'phone'
 # This should be the only file where you use puts and gets
 # ARGV
 
+puts 'Establishing connection to database ...'
+ActiveRecord::Base.establish_connection(
+  adapter: 'postgresql',
+  database: 'contact',
+  username: 'development',
+  password: 'develeopment',
+  host: 'localhost',
+  port: 5432,
+  pool: 5,
+  encoding: 'unicode',
+  min_messages: 'error'
+)
+puts 'CONNECTED'
 
-if ARGV[0].downcase == "help"
+if ARGV[0] == "help"
   puts "Here is a list of available commands:
     new          - Create a new contact
     new phone    - Add a new phone number to a contact
     list         - List all contacts
-    list numbers - List all phone numebrs in your list 
     show         - Show a contact
     find         - Find a contact"
 elsif ARGV[0] == "new"
   
   # puts contact.id
-  if ARGV[1].downcase == "phone"
+  if ARGV[1] == "phone"
     puts "Enter the type of number you wish to add:"
-    type = STDIN.gets.chomp
+    cell_type = STDIN.gets.chomp
     puts "Enter the number (XXXXXXXXXX):"
     number = STDIN.gets.chomp
-    hash = {'type' => type, 'number' => number, 'contact_id' => ARGV[2]}
-    phone = Phone.new(hash)
-    phone.save
+    phone = Phone.create({:cell_type => cell_type, :number => number, :contact_id => ARGV[2]})
     puts phone.id
   else
     puts "Enter your first name: "
@@ -33,19 +47,15 @@ elsif ARGV[0] == "new"
     lname = STDIN.gets.chomp
     puts "Enter #{fname}'s email address: "
     eml = STDIN.gets.chomp
-    hash = {'firstname' => fname, 'lastname' => lname, 'email' => eml}
-    contact = Contact.new(hash)
-    contact.save
+    contact = Contact.create({'firstname' => fname, 'lastname' => lname, 'email' => eml})
+    puts contact.id
   end
 elsif ARGV[0].include? "find"
-  puts Contact.find(ARGV[1])
+  tp Contact.search(ARGV[1])
 elsif ARGV[0].include? "list"
-  if ARGV[1] == "numbers"
-    puts Phone.all_numbers
-  end
-  puts Contact.all
+  tp Contact.all, "firstname", "lastname", "email", {"phones.cell_type" => {:display_name => 'Phone Type'}}, {"phones.number" => {:display_name => 'Number'}}
 elsif ARGV[0].include? "show"
-  puts Contact.show(ARGV[1])
+  tp Contact.find(ARGV[1].to_i)
 
 end
 
