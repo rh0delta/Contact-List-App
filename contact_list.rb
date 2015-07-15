@@ -1,5 +1,7 @@
 require_relative 'contact'
 require_relative 'phone'
+require 'table_print'
+require 'byebug'
 
 # TODO: Implement command line interaction
 # This should be the only file where you use puts and gets
@@ -41,9 +43,10 @@ elsif ARGV[0].include? "find"
   puts Contact.find(ARGV[1])
 elsif ARGV[0].include? "list"
   if ARGV[1] == "numbers"
-    puts Phone.all_numbers
+    # byebug
+    tp Phone.all_numbers, :type, :number, :contact_id
   end
-  puts Contact.all
+  tp Contact.all, :firstname, :lastname, :email
 elsif ARGV[0].include? "show"
   puts Contact.show(ARGV[1])
 
